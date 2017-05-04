@@ -37,6 +37,21 @@ public class PDCTouchDevice {
     // The index of the startup device
     public int startUpIndex = 0;
     
+    // variables for storing stepper motor information
+    public String[] stepperActive = {"YES", "NO"};
+    public int stepperActiveIndex = 1;
+    
+    public String[] stepperSPR = {"12", "24", "72", "144", "180", "200"};
+    public int stepperSPRIndex = 0;
+    
+    public int stepperMaxRPM = 3000; // 0 - 10,000 max
+    
+    public String[] stepperDirection = {"CW", "CCW"};
+    public int stepperDirectionIndex = 1;
+    
+    public String[] stepperExcitation = {"1", "2", "4", "8", "16", "32", "64", "128", "256"};
+    public int stepperExcitationIndex = 0;
+    
     public PDCTouchDevice() {
         // store information about particular motor
         motorInfo.put("Park 480 @ 9V", new Float[]{7f, 7.5f, 7500f, 0f, 0f});
@@ -52,6 +67,9 @@ public class PDCTouchDevice {
         rampMode2 = new int[]{600, 10, getPWM(600), 2700, 30, getPWM(2700)};
         rampMode3 = new int[]{700, 15, getPWM(700), 2500, 40, getPWM(2500)};
         rampMode4 = new int[]{800, 10, getPWM(800), 2000, 25, getPWM(2000)};
+        
+        // store the stepper motor information
+        
     }
     
     public String getMotorName(int index) {

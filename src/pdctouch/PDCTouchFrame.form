@@ -2350,16 +2350,16 @@
                       <Component id="jLabel64" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel9" alignment="0" min="-2" pref="315" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="leftSetupButton1" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="stepperSetupLeftButton" min="-2" pref="102" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="rightSetupButton1" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="stepperSetupRightButton" min="-2" pref="102" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="backSetupButton2" alignment="1" pref="107" max="32767" attributes="0"/>
-                      <Component id="upSetupButton2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="downSetupButton2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="stepperSetupBackButton" alignment="1" pref="107" max="32767" attributes="0"/>
+                      <Component id="stepperSetupUpButton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="stepperSetupDownButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
@@ -2373,21 +2373,21 @@
                   <EmptySpace pref="7" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="upSetupButton2" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="stepperSetupUpButton" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="downSetupButton2" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="stepperSetupDownButton" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel9" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="backSetupButton2" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="stepperSetupBackButton" min="-2" pref="71" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="leftSetupButton1" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="rightSetupButton1" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="stepperSetupLeftButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="stepperSetupRightButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -2406,7 +2406,7 @@
             <Property name="text" type="java.lang.String" value="SETUP / STEPPER"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="backSetupButton2">
+        <Component class="javax.swing.JButton" name="stepperSetupBackButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2429,7 +2429,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backSetupButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rightSetupButton1">
+        <Component class="javax.swing.JButton" name="stepperSetupRightButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2449,10 +2449,10 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rightSetupButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stepperSetupRightButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="upSetupButton2">
+        <Component class="javax.swing.JButton" name="stepperSetupUpButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2475,7 +2475,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="upSetupButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stepperSetupUpButtonActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel9">
@@ -2490,7 +2490,7 @@
             <Property name="rows" type="int" value="5"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel65">
+            <Component class="javax.swing.JLabel" name="stepperSetupActiveLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2501,7 +2501,7 @@
                 <Property name="text" type="java.lang.String" value="ACTIVE"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel66">
+            <Component class="javax.swing.JLabel" name="stepperSetupActiveValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2512,7 +2512,7 @@
                 <Property name="text" type="java.lang.String" value="NO/YES"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel67">
+            <Component class="javax.swing.JLabel" name="stepperSetupSPRLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2523,7 +2523,7 @@
                 <Property name="text" type="java.lang.String" value="STEPS PER REV"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel68">
+            <Component class="javax.swing.JLabel" name="stepperSetupSPRValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2534,7 +2534,7 @@
                 <Property name="text" type="java.lang.String" value="200"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel69">
+            <Component class="javax.swing.JLabel" name="stepperSetupRPMLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2545,7 +2545,7 @@
                 <Property name="text" type="java.lang.String" value="MAX RPM"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel70">
+            <Component class="javax.swing.JLabel" name="stepperSetupRPMValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2556,7 +2556,7 @@
                 <Property name="text" type="java.lang.String" value="3000"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel71">
+            <Component class="javax.swing.JLabel" name="stepperSetupDirectionLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2567,7 +2567,7 @@
                 <Property name="text" type="java.lang.String" value="DIRECTION"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel72">
+            <Component class="javax.swing.JLabel" name="stepperSetupDirectionValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2578,7 +2578,7 @@
                 <Property name="text" type="java.lang.String" value="CW/CCW"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel73">
+            <Component class="javax.swing.JLabel" name="stepperSetupExcitationLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2589,7 +2589,7 @@
                 <Property name="text" type="java.lang.String" value="EXCITATION"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel74">
+            <Component class="javax.swing.JLabel" name="stepperSetupExcitationValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2602,7 +2602,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="downSetupButton2">
+        <Component class="javax.swing.JButton" name="stepperSetupDownButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2622,10 +2622,10 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="downSetupButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stepperSetupDownButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="leftSetupButton1">
+        <Component class="javax.swing.JButton" name="stepperSetupLeftButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2645,7 +2645,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="leftSetupButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stepperSetupLeftButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

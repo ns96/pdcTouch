@@ -237,22 +237,22 @@ public class PDCTouchFrame extends javax.swing.JFrame {
         setupStartModeDownButton = new javax.swing.JButton();
         setupStepperPanel = new javax.swing.JPanel();
         jLabel64 = new javax.swing.JLabel();
-        backSetupButton2 = new javax.swing.JButton();
-        rightSetupButton1 = new javax.swing.JButton();
-        upSetupButton2 = new javax.swing.JButton();
+        stepperSetupBackButton = new javax.swing.JButton();
+        stepperSetupRightButton = new javax.swing.JButton();
+        stepperSetupUpButton = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
-        jLabel65 = new javax.swing.JLabel();
-        jLabel66 = new javax.swing.JLabel();
-        jLabel67 = new javax.swing.JLabel();
-        jLabel68 = new javax.swing.JLabel();
-        jLabel69 = new javax.swing.JLabel();
-        jLabel70 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        jLabel73 = new javax.swing.JLabel();
-        jLabel74 = new javax.swing.JLabel();
-        downSetupButton2 = new javax.swing.JButton();
-        leftSetupButton1 = new javax.swing.JButton();
+        stepperSetupActiveLabel = new javax.swing.JLabel();
+        stepperSetupActiveValueLabel = new javax.swing.JLabel();
+        stepperSetupSPRLabel = new javax.swing.JLabel();
+        stepperSetupSPRValueLabel = new javax.swing.JLabel();
+        stepperSetupRPMLabel = new javax.swing.JLabel();
+        stepperSetupRPMValueLabel = new javax.swing.JLabel();
+        stepperSetupDirectionLabel = new javax.swing.JLabel();
+        stepperSetupDirectionValueLabel = new javax.swing.JLabel();
+        stepperSetupExcitationLabel = new javax.swing.JLabel();
+        stepperSetupExcitationValueLabel = new javax.swing.JLabel();
+        stepperSetupDownButton = new javax.swing.JButton();
+        stepperSetupLeftButton = new javax.swing.JButton();
         setupRampModePanel = new javax.swing.JPanel();
         setupRampModeLabel = new javax.swing.JLabel();
         rampSetupBackButton = new javax.swing.JButton();
@@ -1478,117 +1478,117 @@ public class PDCTouchFrame extends javax.swing.JFrame {
         jLabel64.setForeground(java.awt.Color.white);
         jLabel64.setText("SETUP / STEPPER");
 
-        backSetupButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        backSetupButton2.setForeground(java.awt.Color.white);
-        backSetupButton2.setText("BACK");
-        backSetupButton2.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
-        backSetupButton2.setContentAreaFilled(false);
-        backSetupButton2.setFocusable(false);
-        backSetupButton2.addActionListener(new java.awt.event.ActionListener() {
+        stepperSetupBackButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupBackButton.setForeground(java.awt.Color.white);
+        stepperSetupBackButton.setText("BACK");
+        stepperSetupBackButton.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
+        stepperSetupBackButton.setContentAreaFilled(false);
+        stepperSetupBackButton.setFocusable(false);
+        stepperSetupBackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backSetupButtonActionPerformed(evt);
             }
         });
 
-        rightSetupButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        rightSetupButton1.setForeground(java.awt.Color.white);
-        rightSetupButton1.setText(">");
-        rightSetupButton1.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
-        rightSetupButton1.setContentAreaFilled(false);
-        rightSetupButton1.setFocusable(false);
-        rightSetupButton1.addActionListener(new java.awt.event.ActionListener() {
+        stepperSetupRightButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupRightButton.setForeground(java.awt.Color.white);
+        stepperSetupRightButton.setText(">");
+        stepperSetupRightButton.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
+        stepperSetupRightButton.setContentAreaFilled(false);
+        stepperSetupRightButton.setFocusable(false);
+        stepperSetupRightButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rightSetupButton1ActionPerformed(evt);
+                stepperSetupRightButtonActionPerformed(evt);
             }
         });
 
-        upSetupButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        upSetupButton2.setForeground(java.awt.Color.white);
-        upSetupButton2.setText("UP");
-        upSetupButton2.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
-        upSetupButton2.setContentAreaFilled(false);
-        upSetupButton2.setFocusPainted(false);
-        upSetupButton2.setMaximumSize(new java.awt.Dimension(75, 50));
-        upSetupButton2.addActionListener(new java.awt.event.ActionListener() {
+        stepperSetupUpButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupUpButton.setForeground(java.awt.Color.white);
+        stepperSetupUpButton.setText("UP");
+        stepperSetupUpButton.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
+        stepperSetupUpButton.setContentAreaFilled(false);
+        stepperSetupUpButton.setFocusPainted(false);
+        stepperSetupUpButton.setMaximumSize(new java.awt.Dimension(75, 50));
+        stepperSetupUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                upSetupButton2ActionPerformed(evt);
+                stepperSetupUpButtonActionPerformed(evt);
             }
         });
 
         jPanel9.setBackground(java.awt.Color.black);
         jPanel9.setLayout(new java.awt.GridLayout(5, 3));
 
-        jLabel65.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel65.setForeground(java.awt.Color.white);
-        jLabel65.setText("ACTIVE");
-        jPanel9.add(jLabel65);
+        stepperSetupActiveLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupActiveLabel.setForeground(java.awt.Color.white);
+        stepperSetupActiveLabel.setText("ACTIVE");
+        jPanel9.add(stepperSetupActiveLabel);
 
-        jLabel66.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel66.setForeground(java.awt.Color.white);
-        jLabel66.setText("NO/YES");
-        jPanel9.add(jLabel66);
+        stepperSetupActiveValueLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupActiveValueLabel.setForeground(java.awt.Color.white);
+        stepperSetupActiveValueLabel.setText("NO/YES");
+        jPanel9.add(stepperSetupActiveValueLabel);
 
-        jLabel67.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel67.setForeground(java.awt.Color.white);
-        jLabel67.setText("STEPS PER REV");
-        jPanel9.add(jLabel67);
+        stepperSetupSPRLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupSPRLabel.setForeground(java.awt.Color.white);
+        stepperSetupSPRLabel.setText("STEPS PER REV");
+        jPanel9.add(stepperSetupSPRLabel);
 
-        jLabel68.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel68.setForeground(java.awt.Color.white);
-        jLabel68.setText("200");
-        jPanel9.add(jLabel68);
+        stepperSetupSPRValueLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupSPRValueLabel.setForeground(java.awt.Color.white);
+        stepperSetupSPRValueLabel.setText("200");
+        jPanel9.add(stepperSetupSPRValueLabel);
 
-        jLabel69.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel69.setForeground(java.awt.Color.white);
-        jLabel69.setText("MAX RPM");
-        jPanel9.add(jLabel69);
+        stepperSetupRPMLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupRPMLabel.setForeground(java.awt.Color.white);
+        stepperSetupRPMLabel.setText("MAX RPM");
+        jPanel9.add(stepperSetupRPMLabel);
 
-        jLabel70.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel70.setForeground(java.awt.Color.white);
-        jLabel70.setText("3000");
-        jPanel9.add(jLabel70);
+        stepperSetupRPMValueLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupRPMValueLabel.setForeground(java.awt.Color.white);
+        stepperSetupRPMValueLabel.setText("3000");
+        jPanel9.add(stepperSetupRPMValueLabel);
 
-        jLabel71.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel71.setForeground(java.awt.Color.white);
-        jLabel71.setText("DIRECTION");
-        jPanel9.add(jLabel71);
+        stepperSetupDirectionLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupDirectionLabel.setForeground(java.awt.Color.white);
+        stepperSetupDirectionLabel.setText("DIRECTION");
+        jPanel9.add(stepperSetupDirectionLabel);
 
-        jLabel72.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel72.setForeground(java.awt.Color.white);
-        jLabel72.setText("CW/CCW");
-        jPanel9.add(jLabel72);
+        stepperSetupDirectionValueLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupDirectionValueLabel.setForeground(java.awt.Color.white);
+        stepperSetupDirectionValueLabel.setText("CW/CCW");
+        jPanel9.add(stepperSetupDirectionValueLabel);
 
-        jLabel73.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel73.setForeground(java.awt.Color.white);
-        jLabel73.setText("EXCITATION");
-        jPanel9.add(jLabel73);
+        stepperSetupExcitationLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupExcitationLabel.setForeground(java.awt.Color.white);
+        stepperSetupExcitationLabel.setText("EXCITATION");
+        jPanel9.add(stepperSetupExcitationLabel);
 
-        jLabel74.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel74.setForeground(java.awt.Color.white);
-        jLabel74.setText("HALF STEP");
-        jPanel9.add(jLabel74);
+        stepperSetupExcitationValueLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupExcitationValueLabel.setForeground(java.awt.Color.white);
+        stepperSetupExcitationValueLabel.setText("HALF STEP");
+        jPanel9.add(stepperSetupExcitationValueLabel);
 
-        downSetupButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        downSetupButton2.setForeground(java.awt.Color.white);
-        downSetupButton2.setText("DOWN");
-        downSetupButton2.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
-        downSetupButton2.setContentAreaFilled(false);
-        downSetupButton2.setFocusable(false);
-        downSetupButton2.addActionListener(new java.awt.event.ActionListener() {
+        stepperSetupDownButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupDownButton.setForeground(java.awt.Color.white);
+        stepperSetupDownButton.setText("DOWN");
+        stepperSetupDownButton.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
+        stepperSetupDownButton.setContentAreaFilled(false);
+        stepperSetupDownButton.setFocusable(false);
+        stepperSetupDownButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                downSetupButton2ActionPerformed(evt);
+                stepperSetupDownButtonActionPerformed(evt);
             }
         });
 
-        leftSetupButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        leftSetupButton1.setForeground(java.awt.Color.white);
-        leftSetupButton1.setText("<");
-        leftSetupButton1.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
-        leftSetupButton1.setContentAreaFilled(false);
-        leftSetupButton1.setFocusable(false);
-        leftSetupButton1.addActionListener(new java.awt.event.ActionListener() {
+        stepperSetupLeftButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        stepperSetupLeftButton.setForeground(java.awt.Color.white);
+        stepperSetupLeftButton.setText("<");
+        stepperSetupLeftButton.setBorder(new javax.swing.border.LineBorder(java.awt.Color.white, 1, true));
+        stepperSetupLeftButton.setContentAreaFilled(false);
+        stepperSetupLeftButton.setFocusable(false);
+        stepperSetupLeftButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                leftSetupButton1ActionPerformed(evt);
+                stepperSetupLeftButtonActionPerformed(evt);
             }
         });
 
@@ -1601,14 +1601,14 @@ public class PDCTouchFrame extends javax.swing.JFrame {
                     .addComponent(jLabel64)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(setupStepperPanelLayout.createSequentialGroup()
-                        .addComponent(leftSetupButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stepperSetupLeftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rightSetupButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(stepperSetupRightButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(setupStepperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backSetupButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(upSetupButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(downSetupButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(stepperSetupBackButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(stepperSetupUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(stepperSetupDownButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
         setupStepperPanelLayout.setVerticalGroup(
@@ -1619,18 +1619,18 @@ public class PDCTouchFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(setupStepperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(setupStepperPanelLayout.createSequentialGroup()
-                        .addComponent(upSetupButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stepperSetupUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(downSetupButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(stepperSetupDownButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(setupStepperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(setupStepperPanelLayout.createSequentialGroup()
-                        .addComponent(backSetupButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stepperSetupBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, setupStepperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(leftSetupButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rightSetupButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(stepperSetupLeftButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(stepperSetupRightButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         setupRampModePanel.setBackground(java.awt.Color.black);
@@ -2270,26 +2270,138 @@ public class PDCTouchFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_setupStartModeDownButtonActionPerformed
 
-    private void rightSetupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightSetupButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rightSetupButton1ActionPerformed
+    private void stepperSetupRightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepperSetupRightButtonActionPerformed
+        setupParamIndex++;
+        updateStepperSetupValue(1);
+    }//GEN-LAST:event_stepperSetupRightButtonActionPerformed
 
-    private void upSetupButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upSetupButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_upSetupButton2ActionPerformed
+    private void stepperSetupUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepperSetupUpButtonActionPerformed
+        setupRow--;
+        
+        if(setupRow < 0) {
+            setupRow = 0;
+        } else {
+            selectStepperSetupRow();
+        }
+    }//GEN-LAST:event_stepperSetupUpButtonActionPerformed
 
-    private void downSetupButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downSetupButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_downSetupButton2ActionPerformed
-
-    private void leftSetupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftSetupButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_leftSetupButton1ActionPerformed
-
+    private void stepperSetupDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepperSetupDownButtonActionPerformed
+        setupRow++;
+        
+        if(setupRow > 4) {
+            setupRow = 4;
+        } else {
+            selectStepperSetupRow();
+        }
+    }//GEN-LAST:event_stepperSetupDownButtonActionPerformed
+    
+    private void selectStepperSetupRow() {
+        // reset the parameter index
+        setupParamIndex = 0;
+        
+        setupCurrentLabel.setForeground(Color.white);
+        
+        switch (setupRow) {
+            case 0:
+                stepperSetupActiveLabel.setForeground(Color.red);
+                setupCurrentLabel = motorSetupNameLabel;
+                break;
+            case 1:
+                stepperSetupSPRLabel.setForeground(Color.red);
+                setupCurrentLabel = stepperSetupSPRLabel;
+                break;
+            case 2:
+                stepperSetupRPMLabel.setForeground(Color.red);
+                setupCurrentLabel = stepperSetupRPMLabel;
+                break;
+            case 3:
+                stepperSetupDirectionLabel.setForeground(Color.red);
+                setupCurrentLabel = stepperSetupDirectionLabel;
+                break;
+            case 4:
+                stepperSetupExcitationLabel.setForeground(Color.red);
+                setupCurrentLabel = stepperSetupExcitationLabel;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private void stepperSetupLeftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stepperSetupLeftButtonActionPerformed
+        setupParamIndex--;
+        if(setupParamIndex < 0) {
+            setupParamIndex = 0;
+        }
+        
+        updateStepperSetupValue(-1);
+    }//GEN-LAST:event_stepperSetupLeftButtonActionPerformed
+    
     private void setupStepperButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setupStepperButtonActionPerformed
+        print("Display Stepper Setup Screen ...");
+        updateStepperSetupPanel();
         showPanel(setupStepperPanel);
     }//GEN-LAST:event_setupStepperButtonActionPerformed
-
+    
+    private void updateStepperSetupPanel() {
+        setupRow = 0;
+        setupParamIndex = pdcDevice.stepperActiveIndex;
+        
+        stepperSetupActiveLabel.setForeground(Color.red);
+        stepperSetupActiveValueLabel.setText(pdcDevice.stepperActive[pdcDevice.stepperActiveIndex]);
+        setupCurrentLabel = stepperSetupActiveLabel;
+        
+        stepperSetupSPRValueLabel.setText(pdcDevice.stepperSPR[pdcDevice.stepperSPRIndex]);
+        stepperSetupRPMValueLabel.setText("" + pdcDevice.stepperMaxRPM);
+        stepperSetupDirectionValueLabel.setText(pdcDevice.stepperDirection[pdcDevice.stepperDirectionIndex]);
+        stepperSetupExcitationValueLabel.setText(pdcDevice.stepperExcitation[pdcDevice.stepperExcitationIndex]);
+    }
+    
+    private void updateStepperSetupValue(int change) {
+        if(setupRow == 0) {
+            if(setupParamIndex < pdcDevice.stepperActive.length) {
+                pdcDevice.stepperActiveIndex = setupParamIndex;
+                stepperSetupActiveValueLabel.setText(pdcDevice.stepperActive[setupParamIndex]);
+            } else {
+                setupParamIndex = 0;
+            }
+        } else if(setupRow == 1) {
+            int motorPoles = Integer.parseInt(motorSetupPoleValueLabel.getText()) + change;
+            
+            if(motorPoles >= 1 && motorPoles <= pdcDevice.maxPoles) {
+               pdcDevice.motorPoles = motorPoles;
+               motorSetupPoleValueLabel.setText("" + motorPoles);
+            } 
+        } else if(setupRow == 2) {
+            String[] sa = motorSetupALabel.getText().split("=");
+            float value = Float.parseFloat(sa[1]);
+            
+            pdcDevice.a = value + (float)change/10;
+            String svalue = String.format("%.1f", pdcDevice.a);
+            motorSetupALabel.setText("a=" + svalue);
+        } else if(setupRow == 3) {
+            String[] sa = motorSetupBLabel.getText().split("=");
+            float value = Float.parseFloat(sa[1]);
+            
+            pdcDevice.b = value + change*100;
+            String svalue = String.format("%.1f", pdcDevice.b);
+            motorSetupBLabel.setText("b=" + svalue);
+        } else if(setupRow == 4) {
+            String[] sa = motorSetupCLabel.getText().split("=");
+            float value = Float.parseFloat(sa[1]);
+            
+            pdcDevice.c = value + change*10;
+            String svalue = String.format("%.1f", pdcDevice.c);
+            motorSetupCLabel.setText("c=" + svalue);
+        } else if(setupRow == 5) {
+            String[] sa = motorSetupDLabel.getText().split("=");
+            float value = Float.parseFloat(sa[1]);
+            
+            pdcDevice.d = value + change*10;
+            String svalue = String.format("%.1f", pdcDevice.d);
+            motorSetupDLabel.setText("d=" + svalue);
+        }
+    }
+    
     private void rampSetupMinusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rampSetupMinusButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rampSetupMinusButtonActionPerformed
@@ -2430,13 +2542,11 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     private javax.swing.JButton backButton3;
     private javax.swing.JButton backButton4;
     private javax.swing.JButton backSetupButton;
-    private javax.swing.JButton backSetupButton2;
     private javax.swing.JButton clearButton;
     private javax.swing.JButton closeButton;
     private javax.swing.JTextArea consoleTextArea;
     private javax.swing.JButton dipCoaterButton;
     private javax.swing.JPanel dipCoaterPanel;
-    private javax.swing.JButton downSetupButton2;
     private javax.swing.JButton downSetupButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -2458,17 +2568,7 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
-    private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
-    private javax.swing.JLabel jLabel73;
-    private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
@@ -2504,7 +2604,6 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     private javax.swing.JLabel keyPadInputLabel;
     private javax.swing.JPanel keyPadInputPanel;
     private javax.swing.JButton keyPadOKButton;
-    private javax.swing.JButton leftSetupButton1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel motorSetupALabel;
     private javax.swing.JLabel motorSetupBLabel;
@@ -2538,7 +2637,6 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     private javax.swing.JButton rampStartButton;
     private javax.swing.JButton rampStopButton;
     private javax.swing.JButton rampUpButton;
-    private javax.swing.JButton rightSetupButton1;
     private javax.swing.JPanel screenPanel;
     private javax.swing.JButton setupBackButton;
     private javax.swing.JButton setupButton;
@@ -2581,7 +2679,21 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     private javax.swing.JPanel spinCoaterRampPanel;
     private javax.swing.JLabel spinCoaterSpeedLabel;
     private javax.swing.JLabel spinCoaterTimerLabel;
-    private javax.swing.JButton upSetupButton2;
+    private javax.swing.JLabel stepperSetupActiveLabel;
+    private javax.swing.JLabel stepperSetupActiveValueLabel;
+    private javax.swing.JButton stepperSetupBackButton;
+    private javax.swing.JLabel stepperSetupDirectionLabel;
+    private javax.swing.JLabel stepperSetupDirectionValueLabel;
+    private javax.swing.JButton stepperSetupDownButton;
+    private javax.swing.JLabel stepperSetupExcitationLabel;
+    private javax.swing.JLabel stepperSetupExcitationValueLabel;
+    private javax.swing.JButton stepperSetupLeftButton;
+    private javax.swing.JLabel stepperSetupRPMLabel;
+    private javax.swing.JLabel stepperSetupRPMValueLabel;
+    private javax.swing.JButton stepperSetupRightButton;
+    private javax.swing.JLabel stepperSetupSPRLabel;
+    private javax.swing.JLabel stepperSetupSPRValueLabel;
+    private javax.swing.JButton stepperSetupUpButton;
     private javax.swing.JButton upSetupButton3;
     // End of variables declaration//GEN-END:variables
 
