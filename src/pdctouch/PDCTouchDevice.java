@@ -27,6 +27,7 @@ public class PDCTouchDevice {
     private int[] rampMode2;
     private int[] rampMode3;
     private int[] rampMode4;
+    public int[] rampMode;
     
     // store the motor information is hashmap
     private LinkedHashMap<String, Float[]> motorInfo = new LinkedHashMap<>();
@@ -45,11 +46,12 @@ public class PDCTouchDevice {
     public int stepperSPRIndex = 0;
     
     public int stepperMaxRPM = 3000; // 0 - 10,000 max
+    public int stepperRPMLimit = 10000;
     
     public String[] stepperDirection = {"CW", "CCW"};
-    public int stepperDirectionIndex = 1;
+    public int stepperDirectionIndex = 0;
     
-    public String[] stepperExcitation = {"1", "2", "4", "8", "16", "32", "64", "128", "256"};
+    public String[] stepperExcitation = {"1", "2", "4", "8", "16", "32"};
     public int stepperExcitationIndex = 0;
     
     public PDCTouchDevice() {
@@ -67,9 +69,6 @@ public class PDCTouchDevice {
         rampMode2 = new int[]{600, 10, getPWM(600), 2700, 30, getPWM(2700)};
         rampMode3 = new int[]{700, 15, getPWM(700), 2500, 40, getPWM(2500)};
         rampMode4 = new int[]{800, 10, getPWM(800), 2000, 25, getPWM(2000)};
-        
-        // store the stepper motor information
-        
     }
     
     public String getMotorName(int index) {
@@ -87,18 +86,23 @@ public class PDCTouchDevice {
     
     /**
      * Get the particular ramp mode data
+     * 
      * @param mode
      * @return 
      */
     public int[] getRampModeData(int mode) {
         switch (mode) {
             case 1:
+                rampMode = rampMode1;
                 return rampMode1;
             case 2:
+                rampMode = rampMode2;
                 return rampMode2;
             case 3:
+                rampMode = rampMode3;
                 return rampMode3;
             default:
+                rampMode = rampMode4;
                 return rampMode4;
         }
     }
@@ -107,9 +111,8 @@ public class PDCTouchDevice {
      * Set the Ramp Mode
      * 
      * @param mode
-     * @param rampMode 
      */
-    public void setRampModeData(int mode, int[] rampMode) {
+    public void setRampModeData(int mode) {
         switch (mode) {
             case 1:
                 rampMode1 = rampMode;

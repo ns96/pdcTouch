@@ -2426,7 +2426,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backSetupButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stepperSetupBackButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="stepperSetupRightButton">
@@ -2684,16 +2684,16 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="rampSetupIncButton" min="-2" pref="102" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="rampSetupPlusButton" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="rampSetupLeftButton" min="-2" pref="102" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="rampSetupMinusButton" max="32767" attributes="0"/>
+                          <Component id="rampSetupRightButton" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="rampSetupBackButton" alignment="1" max="32767" attributes="0"/>
-                      <Component id="upSetupButton3" alignment="0" max="32767" attributes="0"/>
-                      <Component id="downSetupButton3" alignment="0" pref="98" max="32767" attributes="0"/>
+                      <Component id="rampSetupUpButton" alignment="0" max="32767" attributes="0"/>
+                      <Component id="rampSetupDownButton" alignment="0" pref="98" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
@@ -2707,9 +2707,9 @@
                   <EmptySpace pref="7" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="upSetupButton3" min="-2" pref="70" max="-2" attributes="0"/>
+                          <Component id="rampSetupUpButton" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="downSetupButton3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="rampSetupDownButton" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel10" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
                   </Group>
@@ -2718,12 +2718,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="rampSetupBackButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-                              <Component id="rampSetupMinusButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                              <Component id="rampSetupRightButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="rampSetupPlusButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="rampSetupLeftButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
                           <Component id="rampSetupIncButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -2766,7 +2766,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backSetupButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rampSetupMinusButton">
+        <Component class="javax.swing.JButton" name="rampSetupRightButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2774,7 +2774,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="-"/>
+            <Property name="text" type="java.lang.String" value="&gt;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder roundedCorners="true">
@@ -2786,10 +2786,10 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupMinusButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupRightButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="upSetupButton3">
+        <Component class="javax.swing.JButton" name="rampSetupUpButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2812,7 +2812,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="upSetupButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupUpButtonActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel10">
@@ -2827,7 +2827,7 @@
             <Property name="rows" type="int" value="6"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel76">
+            <Component class="javax.swing.JLabel" name="rampSetupMinRPMLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2838,7 +2838,7 @@
                 <Property name="text" type="java.lang.String" value="MIN RPM"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel77">
+            <Component class="javax.swing.JLabel" name="rampSetupMinRPMValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2849,7 +2849,7 @@
                 <Property name="text" type="java.lang.String" value="500"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel78">
+            <Component class="javax.swing.JLabel" name="rampSetupMinTimeLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2860,7 +2860,7 @@
                 <Property name="text" type="java.lang.String" value="MIN TIME"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel79">
+            <Component class="javax.swing.JLabel" name="rampSetupMinTimeValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2871,7 +2871,7 @@
                 <Property name="text" type="java.lang.String" value="10"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel80">
+            <Component class="javax.swing.JLabel" name="rampSetupMaxRPMLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2882,7 +2882,7 @@
                 <Property name="text" type="java.lang.String" value="MAX RPM"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel81">
+            <Component class="javax.swing.JLabel" name="rampSetupMaxRPMValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2893,7 +2893,7 @@
                 <Property name="text" type="java.lang.String" value="3100"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel82">
+            <Component class="javax.swing.JLabel" name="rampSetupMaxTimeLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2904,7 +2904,7 @@
                 <Property name="text" type="java.lang.String" value="MAX TIME"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel83">
+            <Component class="javax.swing.JLabel" name="rampSetupMaxTimeValueLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
@@ -2961,7 +2961,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="downSetupButton3">
+        <Component class="javax.swing.JButton" name="rampSetupDownButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2981,10 +2981,10 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="downSetupButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupDownButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rampSetupPlusButton">
+        <Component class="javax.swing.JButton" name="rampSetupLeftButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -2992,7 +2992,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="+"/>
+            <Property name="text" type="java.lang.String" value="&lt;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder roundedCorners="true">
@@ -3004,7 +3004,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupPlusButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupLeftButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="rampSetupIncButton">
