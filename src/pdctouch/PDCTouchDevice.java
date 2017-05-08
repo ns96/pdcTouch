@@ -112,7 +112,7 @@ public class PDCTouchDevice {
      * 
      * @param mode
      */
-    public void setRampModeData(int mode) {
+    public void saveRampModeData(int mode) {
         switch (mode) {
             case 1:
                 rampMode1 = rampMode;

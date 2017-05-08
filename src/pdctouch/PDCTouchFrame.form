@@ -173,9 +173,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="spinCoaterIncrementButton" min="-2" pref="103" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="spinCoaterPlusButton" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="spinCoaterLeftButton" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="spinCoaterMinusButton" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="spinCoaterRightButton" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel3" max="32767" attributes="0"/>
                   </Group>
@@ -208,8 +208,8 @@
                       <Component id="spinCoaterBackButton" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="spinCoaterIncrementButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="spinCoaterPlusButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="spinCoaterMinusButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="spinCoaterLeftButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="spinCoaterRightButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -405,7 +405,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="spinCoaterPlusButton">
+        <Component class="javax.swing.JButton" name="spinCoaterLeftButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -413,7 +413,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="+"/>
+            <Property name="text" type="java.lang.String" value="&lt;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder roundedCorners="true">
@@ -425,10 +425,10 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spinCoaterPlusButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spinCoaterLeftButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="spinCoaterMinusButton">
+        <Component class="javax.swing.JButton" name="spinCoaterRightButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -436,7 +436,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="-"/>
+            <Property name="text" type="java.lang.String" value="&gt;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder roundedCorners="true">
@@ -448,7 +448,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spinCoaterMinusButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spinCoaterRightButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -2676,13 +2676,13 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="setupRampModeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rampSetupModeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jPanel10" alignment="0" min="-2" pref="315" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="rampSetupIncButton" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="rampSetupIncrementButton" min="-2" pref="102" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="rampSetupLeftButton" min="-2" pref="102" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -2703,7 +2703,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
-                  <Component id="setupRampModeLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="rampSetupModeLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="7" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -2724,7 +2724,7 @@
                       </Group>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="rampSetupLeftButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="rampSetupIncButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="rampSetupIncrementButton" alignment="3" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -2732,7 +2732,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="setupRampModeLabel">
+        <Component class="javax.swing.JLabel" name="rampSetupModeLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -2763,7 +2763,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backSetupButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupBackButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="rampSetupRightButton">
@@ -3007,7 +3007,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupLeftButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rampSetupIncButton">
+        <Component class="javax.swing.JButton" name="rampSetupIncrementButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -3027,7 +3027,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupIncButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rampSetupIncrementButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -3131,7 +3131,7 @@
                   <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="INSTRAS"/>
+                <Property name="text" type="java.lang.String" value="ACTUSENSE"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -3143,7 +3143,7 @@
                   <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="SCIENTIFIC"/>
+                <Property name="text" type="java.lang.String" value="INC."/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
