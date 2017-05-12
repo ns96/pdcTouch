@@ -66,9 +66,9 @@ public class PDCTouchDevice {
         motorCount = motorInfo.size();
         
         rampMode1 = new int[]{500, 10, getPWM(500), 3100, 35, getPWM(3100)};
-        rampMode2 = new int[]{600, 10, getPWM(600), 2700, 30, getPWM(2700)};
+        rampMode2 = new int[]{600, 12, getPWM(600), 2700, 30, getPWM(2700)};
         rampMode3 = new int[]{700, 15, getPWM(700), 2500, 40, getPWM(2500)};
-        rampMode4 = new int[]{800, 10, getPWM(800), 2000, 25, getPWM(2000)};
+        rampMode4 = new int[]{800, 20, getPWM(800), 2000, 25, getPWM(2000)};
     }
     
     public String getMotorName(int index) {
@@ -90,20 +90,20 @@ public class PDCTouchDevice {
      * @param mode
      * @return 
      */
-    public int[] getRampModeData(int mode) {
+    public void setRampModeData(int mode) {
         switch (mode) {
             case 1:
                 rampMode = rampMode1;
-                return rampMode1;
+                break;
             case 2:
                 rampMode = rampMode2;
-                return rampMode2;
+                break;
             case 3:
                 rampMode = rampMode3;
-                return rampMode3;
+                break;
             default:
                 rampMode = rampMode4;
-                return rampMode4;
+                break;
         }
     }
     
@@ -116,12 +116,16 @@ public class PDCTouchDevice {
         switch (mode) {
             case 1:
                 rampMode1 = rampMode;
+                break;
             case 2:
                 rampMode2 = rampMode;
+                break;
             case 3:
                 rampMode3 = rampMode;
+                break;
             default:
                 rampMode4 = rampMode;
+                break;
         }
     }
     

@@ -33,7 +33,6 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     
     // the current ramp mode
     private int rampMode = 1;
-    private int[] rampModeData;
     private int rampStep = 1;
     
     // variable for the keypad panel
@@ -48,7 +47,7 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     // variables used by ramp setup panels
     private int rampPanelNumber = 1;
     private final int[] SETUP_INCREMENT = {1, 2, 5, 10, 50, 100};
-    private int setupIncrementIndex = 2;
+    private int setupIncrementIndex = 1;
     
     /**
      * Creates new form PDCTouchFrame
@@ -85,8 +84,8 @@ public class PDCTouchFrame extends javax.swing.JFrame {
             // move to the next step once we hit zero
             if(movingTime == 0) {
                 rampStep++;
-                movingTime = rampModeData[4];
-                pwmValue = rampModeData[5];
+                movingTime = pdcDevice.rampMode[4];
+                pwmValue = pdcDevice.rampMode[5];
             }
             
             if(rampStep == 1) {
@@ -110,10 +109,10 @@ public class PDCTouchFrame extends javax.swing.JFrame {
                 movingTime = 0;
                 
                 rampMinLabel.setForeground(Color.white);
-                rampMinTimeLabel.setText("" + rampModeData[1]);
+                rampMinTimeLabel.setText("" + pdcDevice.rampMode[1]);
                 
                 rampMaxLabel.setForeground(Color.white);
-                rampMaxTimeLabel.setText("" + rampModeData[4]);
+                rampMaxTimeLabel.setText("" + pdcDevice.rampMode[4]);
                 
                 rampSpeedLabel.setText("0");
                 rampPWMLabel.setText("1000");
@@ -1198,7 +1197,7 @@ public class PDCTouchFrame extends javax.swing.JFrame {
         jLabel41.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel41.setForeground(java.awt.Color.white);
         jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel41.setText("Instras Scientific INC.");
+        jLabel41.setText("Actusense INC.");
         jPanel5.add(jLabel41);
 
         javax.swing.GroupLayout aboutPanelLayout = new javax.swing.GroupLayout(aboutPanel);
@@ -1924,13 +1923,13 @@ public class PDCTouchFrame extends javax.swing.JFrame {
      * @param rampMode 
      */
     private void updateRampLabels(int mode) {
-        rampModeData = pdcDevice.getRampModeData(mode);
+        pdcDevice.setRampModeData(mode);
         
         rampModeLabel.setText("SPIN COATER / RAMP MODE # "  + mode);
-        rampMinSpeedLabel.setText("" + rampModeData[0]);
-        rampMinTimeLabel.setText("" + rampModeData[1]);
-        rampMaxSpeedLabel.setText("" + rampModeData[3]);
-        rampMaxTimeLabel.setText("" + rampModeData[4]);
+        rampMinSpeedLabel.setText("" + pdcDevice.rampMode[0]);
+        rampMinTimeLabel.setText("" + pdcDevice.rampMode[1]);
+        rampMaxSpeedLabel.setText("" + pdcDevice.rampMode[3]);
+        rampMaxTimeLabel.setText("" + pdcDevice.rampMode[4]);
     }
     
     private void dipCoaterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dipCoaterButtonActionPerformed
@@ -2051,8 +2050,8 @@ public class PDCTouchFrame extends javax.swing.JFrame {
 
     private void rampStartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rampStartButtonActionPerformed
         rampStep = 1;
-        movingTime = rampModeData[1];
-        pwmValue = rampModeData[2];
+        movingTime = pdcDevice.rampMode[1];
+        pwmValue = pdcDevice.rampMode[2];
         moving = true;
         rampTimer.start();
         print("Ramp Start pressed ..");
@@ -2405,7 +2404,8 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     }
     
     private void rampSetupRightButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rampSetupRightButtonActionPerformed
-        // TODO add your handling code here:
+        setupParamIndex++;
+        updateRampSetupValue(1);
     }//GEN-LAST:event_rampSetupRightButtonActionPerformed
 
     private void rampSetupUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rampSetupUpButtonActionPerformed
@@ -2441,6 +2441,9 @@ public class PDCTouchFrame extends javax.swing.JFrame {
                 rampSetupMinTimeLabel.setForeground(Color.red);
                 setupCurrentLabel = rampSetupMinTimeLabel;
                 rampSetupSpeedLabel.setText("0");
+                rampSetupPWMLabel.setText("1000");
+                
+                // Stop the motor spinning
                 pwmValue = 1000;
                 break;
             case 2:
@@ -2451,6 +2454,9 @@ public class PDCTouchFrame extends javax.swing.JFrame {
                 rampSetupMaxTimeLabel.setForeground(Color.red);
                 setupCurrentLabel = rampSetupMaxTimeLabel;
                 rampSetupSpeedLabel.setText("0");
+                rampSetupPWMLabel.setText("1000");
+                
+                //Stop the motor spinning
                 pwmValue = 1000;
                 break;
             default:
@@ -2459,9 +2465,62 @@ public class PDCTouchFrame extends javax.swing.JFrame {
     }
     
     private void rampSetupLeftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rampSetupLeftButtonActionPerformed
-        // TODO add your handling code here:
+        setupParamIndex--;
+        if(setupParamIndex < 0) {
+            setupParamIndex = 0;
+        }
+        
+        updateRampSetupValue(-1);
     }//GEN-LAST:event_rampSetupLeftButtonActionPerformed
-
+    
+    private void updateRampSetupValue(int change) {
+        if(setupRow == 0) {
+            // get the current pwm value and and start motor moving
+            int pwm = pdcDevice.rampMode[2] + change*SETUP_INCREMENT[setupIncrementIndex];
+            
+            if(pwm < 1000 || pwm > 2000 ) {
+                return;
+            }
+            
+            int speed = pdcDevice.getSpeed(pwm);
+            
+            // update the UI
+            rampSetupSpeedLabel.setText("" + speed);
+            rampSetupPWMLabel.setText("" + pwm);
+            rampSetupMinRPMValueLabel.setText(speed + " ("  + pwm + " us)");
+            
+            // store this value
+            pdcDevice.rampMode[0] = speed;
+            pdcDevice.rampMode[2] = pwm;
+        } else if(setupRow == 1) {
+            int time = pdcDevice.rampMode[1] + change*SETUP_INCREMENT[setupIncrementIndex];
+            rampSetupMinTimeValueLabel.setText("" + time);
+            pdcDevice.rampMode[1] = time;
+        } else if(setupRow == 2) {
+            // get the current pwm value and and start motor moving
+            int pwm = pdcDevice.rampMode[5] + change*SETUP_INCREMENT[setupIncrementIndex];
+            
+            if(pwm < 1000 || pwm > 2000 ) {
+                return;
+            }
+            
+            int speed = pdcDevice.getSpeed(pwm);
+            
+            // update the UI
+            rampSetupSpeedLabel.setText("" + speed);
+            rampSetupPWMLabel.setText("" + pwm);
+            rampSetupMaxRPMValueLabel.setText(speed + " ("  + pwm + " us)");
+            
+            // store this value
+            pdcDevice.rampMode[3] = speed;
+            pdcDevice.rampMode[5] = pwm;
+        } else if(setupRow == 3) {
+            int time = pdcDevice.rampMode[4] + change*SETUP_INCREMENT[setupIncrementIndex];
+            rampSetupMaxTimeValueLabel.setText("" + time);
+            pdcDevice.rampMode[4] = time;
+        }
+    }
+    
     private void rampSetupIncrementButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rampSetupIncrementButtonActionPerformed
         setupIncrementIndex++;
         if(setupIncrementIndex >= SETUP_INCREMENT.length) {
@@ -2486,7 +2545,7 @@ public class PDCTouchFrame extends javax.swing.JFrame {
         JButton sourceButton = (JButton)evt.getSource();
         String[] sa = sourceButton.getText().split(" # ");
         rampPanelNumber = Integer.parseInt(sa[1]);
-        pdcDevice.getRampModeData(rampPanelNumber);
+        pdcDevice.setRampModeData(rampPanelNumber);
         
         print("Display Ramp Setup Panrl # " + rampPanelNumber);
         updateRampSetupPanel();
@@ -2501,13 +2560,16 @@ public class PDCTouchFrame extends javax.swing.JFrame {
         rampSetupMinRPMLabel.setForeground(Color.red);
         setupCurrentLabel = rampSetupMinRPMLabel;
         
-        rampSetupMinRPMValueLabel.setText("" + pdcDevice.rampMode[0]);
+        rampSetupMinRPMValueLabel.setText(pdcDevice.rampMode[0] + " ("  + pdcDevice.rampMode[2] + " us)");
         rampSetupMinTimeValueLabel.setText("" + pdcDevice.rampMode[1]);
-        rampSetupMaxRPMValueLabel.setText("" + pdcDevice.rampMode[2]);
-        rampSetupMaxTimeValueLabel.setText("" + pdcDevice.rampMode[3]);
+        rampSetupMaxRPMValueLabel.setText(pdcDevice.rampMode[3] + " ("  + pdcDevice.rampMode[5] + " us)");
+        rampSetupMaxTimeValueLabel.setText("" + pdcDevice.rampMode[4]);
         
         rampSetupSpeedLabel.setText("0");
         rampSetupPWMLabel.setText("1000");
+        
+        int setupIncrement = SETUP_INCREMENT[setupIncrementIndex];
+        rampSetupIncrementButton.setText("INC * " + setupIncrement);
     }
     
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
