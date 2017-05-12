@@ -13,8 +13,6 @@ public class PDCTouchDevice {
     public int motorCount;
     public int maxPoles = 22;
         
-    private boolean calibrated = true;
-    
     public int motorPoles = 0;
     public float a = 10;
     public float b = 10000;
@@ -150,10 +148,6 @@ public class PDCTouchDevice {
         return (int)x;
     }
     
-    public boolean isCalibrated() {
-        return calibrated;
-    }
-
     void saveMotorInfo() {
         currentMotorInfo[0] = new Float(motorPoles);
         currentMotorInfo[1] = a;
