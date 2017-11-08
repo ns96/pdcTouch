@@ -5,6 +5,13 @@
  */
 package pdcstv3s;
 
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+
 /**
  *
  * @author nathan
@@ -16,8 +23,26 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
      */
     public PDCSTV3Frame() {
         initComponents();
+        
+        // highlight the dip coater
+        highlightText("DIP COATER");
     }
 
+    /**
+     * Method to highlight a particular ext on the simulated screen
+     * @param text 
+     */
+    private void highlightText(String word) {
+        try {
+            Highlighter highlighter = screenTextArea.getHighlighter();
+            int p0 = screenTextArea.getText().indexOf(word);
+            int p1 = p0 + word.length();
+            highlighter.addHighlight(p0, p1,
+                    new DefaultHighlighter.DefaultHighlightPainter(Color.LIGHT_GRAY));
+        } catch (BadLocationException ex) {
+            Logger.getLogger(PDCSTV3Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
