@@ -18,19 +18,121 @@ import javax.swing.text.Highlighter;
  */
 public class PDCSTV3Frame extends javax.swing.JFrame {
 
+    private boolean connected = false;
+    private int row = 1, srow1 = 1, srow2 = 1;
+    private boolean paused = true;
+    
+    // define some menus
+    private enum Menu {
+        MAIN,
+        ANALOG,
+        DIGITAL,
+        RAMP,
+        DIPCOAT,
+        SETUP,
+        SETUP_BLDC,
+        SETUP_STEPPER
+    }
+    private Menu currentMenu = Menu.MAIN;
+    private Menu backMenu = null;
+
     /**
      * Creates new form PDCSTV3Frame
      */
     public PDCSTV3Frame() {
         initComponents();
-        
-        // highlight the dip coater
-        highlightText("DIP COATER");
+
+        // display the main
+        displayMenu(0);
     }
 
+    private void displayMenu(int change) {
+        if (currentMenu == Menu.MAIN) {
+            backMenu = null;
+            
+            row -= change;
+            if(row > 5) row = 5;
+            if(row < 1) row = 1;
+            
+            screenTextArea.setText(getMainMenuText());
+            highlightText("DIP COATER");
+        } else if (currentMenu == Menu.ANALOG) {
+            backMenu = Menu.MAIN;
+            displayAnalogMenu(change);
+        } else if (currentMenu == Menu.DIGITAL) {
+            backMenu = Menu.MAIN;
+            displayDigitalMenu(change);
+        } else if (currentMenu == Menu.RAMP) {
+            backMenu = Menu.MAIN;
+            displayRampMenu(change);
+        } else if (currentMenu == Menu.DIPCOAT) {
+            backMenu = Menu.MAIN;
+            displayDipCoaterMenu(change);
+        } else if (currentMenu == Menu.SETUP) {
+            backMenu = Menu.MAIN;
+            displaySetupMenu(change);
+        } else if (currentMenu == Menu.SETUP_BLDC) {
+            backMenu = Menu.SETUP;
+            displaySetupBLDCMenu(change);
+        } else if (currentMenu == Menu.SETUP_STEPPER) {
+            backMenu = Menu.SETUP;
+            displaySetupStepperMenu(change);
+        }
+    }
+
+    private void displayAnalogMenu(int change) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ANALOG CONTROL\n");
+        
+        screenTextArea.setText(sb.toString());
+    }
+    
+    private void displayDigitalMenu(int change) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("DIGITAL CONTROL\n");
+        
+        screenTextArea.setText(sb.toString());
+    }
+    
+    private void displayRampMenu(int change) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("RAMP CONTROL\n");
+        
+        screenTextArea.setText(sb.toString());
+    }
+    
+    private void displayDipCoaterMenu(int change) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("DIP COATER\n");
+        
+        screenTextArea.setText(sb.toString());
+    }
+    
+    private void displaySetupMenu(int change) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SETUP\n");
+        
+        screenTextArea.setText(sb.toString());
+    }
+    
+    private void displaySetupBLDCMenu(int change) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("BLDC SETUP\n");
+        
+        screenTextArea.setText(sb.toString());
+    }
+    
+    private void displaySetupStepperMenu(int change) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("STEPPER SETUP\n");
+        
+        screenTextArea.setText(sb.toString());
+    }
+    
     /**
      * Method to highlight a particular ext on the simulated screen
-     * @param text 
+     *
+     * @param text
      */
     private void highlightText(String word) {
         try {
@@ -43,6 +145,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
             Logger.getLogger(PDCSTV3Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,8 +178,14 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
+        jSlider1.setValue(0);
 
         connectToggleButton.setText("Connect");
+        connectToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectToggleButtonActionPerformed(evt);
+            }
+        });
 
         commTextField.setColumns(5);
         commTextField.setText("COM8");
@@ -86,7 +195,6 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         screenTextArea.setColumns(20);
         screenTextArea.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
         screenTextArea.setRows(5);
-        screenTextArea.setText(getMainMenuText());
         jScrollPane1.setViewportView(screenTextArea);
 
         consoleTextArea.setEditable(false);
@@ -98,12 +206,32 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         clearButton.setText("Clear");
 
         entButton.setText("ENT");
+        entButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entButtonActionPerformed(evt);
+            }
+        });
 
         upButton.setText("UP");
+        upButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upButtonActionPerformed(evt);
+            }
+        });
 
         downButton.setText("DOWN");
+        downButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downButtonActionPerformed(evt);
+            }
+        });
 
         extButton.setText("EXT");
+        extButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,17 +284,66 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Connect to the MiM board
+     *
+     * @param evt
+     */
+    private void connectToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectToggleButtonActionPerformed
+
+    }//GEN-LAST:event_connectToggleButtonActionPerformed
+
+    private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
+        displayMenu(1);
+    }//GEN-LAST:event_upButtonActionPerformed
+
+    private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
+        displayMenu(-1);
+    }//GEN-LAST:event_downButtonActionPerformed
+
+    private void entButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entButtonActionPerformed
+        if (currentMenu == Menu.MAIN) {
+            switch (row) {
+                case 1: currentMenu = Menu.ANALOG;
+                    break;
+                case 2: currentMenu = Menu.DIGITAL;
+                    break;
+                case 3: currentMenu = Menu.RAMP;
+                    break;
+                case 4: currentMenu = Menu.DIPCOAT;
+                    break;
+                case 5: currentMenu = Menu.SETUP;
+                    break;
+                default: currentMenu = Menu.MAIN;
+                    break;
+            }
+            
+            displayMenu(0);
+        }
+    }//GEN-LAST:event_entButtonActionPerformed
+
+    private void extButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extButtonActionPerformed
+        if(backMenu != null && paused) {
+            currentMenu = backMenu;
+            displayMenu(0);
+        } else {
+            paused = true;
+        }
+    }//GEN-LAST:event_extButtonActionPerformed
+
     private String getMainMenuText() {
-        String text = "SELECT MODE\n"
-                + "  *ANALOG\n"
-                + "   DIGITAL\n"
-                + "   RAMP\n"
-                + "   DIP COATER\n"
-                + "   SETUP";
-        
-        return text;
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT MODE\n");
+
+        sb.append(((row == 1) ? "  *ANALOG\n" : "   ANALOG\n"));
+        sb.append(((row == 2) ? "  *DIGITAL\n" : "   DIGITAL\n"));
+        sb.append(((row == 3) ? "  *RAMP\n" : "   RAMP\n"));
+        sb.append(((row == 4) ? "  *DIP COATER\n" : "   DIP COATER\n"));
+        sb.append(((row == 5) ? "  *SETUP" : "   SETUP"));
+
+        return sb.toString();
     }
-    
+
     /**
      * @param args the command line arguments
      */
