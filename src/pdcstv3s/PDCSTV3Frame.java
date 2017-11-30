@@ -946,8 +946,10 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         double rslope = Double.valueOf(df.format(slope/size));
         int rintercept = (int)(intercept/size);
         
-        print("Avg slope: " + rslope);
+        print("\nAvg slope: " + rslope);
         print("Avg intercept: " + rintercept);
+        
+        // TODO send the commands to set these value on the MiM board
     }
 
     private String getPaddedNumber(int number, int pad) {

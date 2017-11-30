@@ -268,7 +268,7 @@ public class MiMTalk {
 
             ArrayList<LinearRegression> lms = new ArrayList<LinearRegression>();
 
-            for(int i = 0; i < 2; i++) {
+            for(int i = 0; i < 4; i++) {
                 LinearRegression lm = new LinearRegression(miMTalk.getMotorProfile(50));
                 lms.add(lm);
                 miMTalk.print(i + ":: " + lm.toString());
