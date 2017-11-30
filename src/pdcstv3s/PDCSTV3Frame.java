@@ -6,11 +6,15 @@
 package pdcstv3s;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
+import mim.LinearRegression;
 import mim.MiMTalk;
 
 /**
@@ -28,7 +32,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
     private int srow2 = 1; // RAMP setup menu
     private int srow3 = 1; // BLDC setup menu
     private int srow4 = 1; // Stepper setup menu
-    
+
     // is the deviced paused
     private boolean paused = true;
 
@@ -61,7 +65,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
     private final int[] ramp1 = {500, 15, 3100, 30};
     private final int[] ramp2 = {600, 25, 3500, 30};
     private final int[] ramp3 = {700, 20, 2600, 40};
-    
+
     // variable for dip coater control
     private int dipSpeed = 0;
     private int dipTravel = 0;
@@ -71,9 +75,6 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
     private int dipTime = 0;
 
     // setup menu variables
-    private int[] speed = {6000, 8000};
-    private int speedIdx = 1;
-
     private String[] start = {"NONE", "ANALOG", "DIGITAL", "RAMP", "DCOAT"};
     private int startIdx = 1;
 
@@ -81,15 +82,27 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
     private int blIdx = 0;
 
     private String[] model = {"SCK300", "SCK300P"};
-    private int modelIdx = 0;
+    private int modelIdx = 1;
+    private int[] speed = {6000, 8000};
+    private int[] bldcStartPWM = {5, 10};
+    private int[] bldcIntercept = {200, 400};
+    private double[] bldcSlope = {9.5, 9.5};
+    
     private int calibratePWM = 0;
     private int calibrateRPM = 0;
+    private int calibrateStep = 0;
+    private final int calibrateCycleCount = 2;
+    private int calibrateCycle = 1;
+   
     private boolean calibrate = false;
-    
+    private ArrayList<Double> xlist;
+    private ArrayList<Double> ylist;
+    private ArrayList<LinearRegression> lms;
+
     private String stepActive = "NO";
     private int stepPerRev = 200;
     private int stepMaxSpeed = 800;
-    private int[] stepEXC = {1,2,4,8,16};
+    private int[] stepEXC = {1, 2, 4, 8, 16};
     private int stepEXCIdx = 1;
     private String stepDirection = "CW";
 
@@ -103,26 +116,33 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         SETUP,
         SETUP_RAMP,
         SETUP_BLDC,
-        SETUP_STEPPER 
+        SETUP_STEPPER,
+        STARTUP
     }
     private Menu currentMenu = Menu.MAIN;
     private Menu backMenu = null;
-
+    
+    private enum Mode {
+        BLDC,
+        STEPPER
+    }
+    private Mode currentMode = Mode.BLDC;
+    
     /**
      * Creates new form PDCSTV3Frame
      */
     public PDCSTV3Frame() {
         initComponents();
-        
+
         // set some default menus
-        if(rampIdx == 1) {
+        if (rampIdx == 1) {
             ramp = ramp1;
-        } else if(rampIdx == 2) {
+        } else if (rampIdx == 2) {
             ramp = ramp2;
         } else {
             ramp = ramp3;
         }
-        
+
         // display the main
         displayMenu(0);
     }
@@ -166,10 +186,15 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
             displayStepperMenu(change);
         }
     }
-
+    
     private void displayMainMenu(int change) {
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT MODE\n");
+        
+        if(connected) {
+            sb.append("SELECT MODE:\n");
+        } else {
+            sb.append("SELECT MODE (C_ERR):\n");
+        }
 
         sb.append(((row == 1) ? "  *ANALOG\n" : "   ANALOG\n"));
         sb.append(((row == 2) ? "  *DIGITAL\n" : "   DIGITAL\n"));
@@ -186,7 +211,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         //double value = (float) jSlider1.getValue();
         //int rpm = (int) ((value / 1000.0) * speed[speedIdx]);
         //setRPM = ((rpm+5)/10)*10;
-           
+
         StringBuilder sb = new StringBuilder();
         sb.append("ANALOG CONTROL\n\n");
         sb.append("MRPM ").append(getMeasuredRPM()).append("\n");
@@ -201,8 +226,8 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         if (setRPM < 0) {
             setRPM = 0;
         }
-        if (setRPM > speed[speedIdx]) {
-            setRPM = speed[speedIdx];
+        if (setRPM > speed[modelIdx]) {
+            setRPM = speed[modelIdx];
         }
 
         StringBuilder sb = new StringBuilder();
@@ -219,11 +244,11 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
     private void displayRampMenu(int change) {
         if (paused) {
             //check to see we need to stop motor
-            if(stepTime > 0) {
+            if (stepTime > 0) {
                 stepTime = 0;
                 stopMotor();
             }
-            
+
             rampIdx += change;
             if (rampIdx < 1) {
                 rampIdx = 1;
@@ -240,9 +265,9 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
             }
         } else {
             int time = runTime - 1;
-            
+
             if (time == 0) {
-                if(rampStep >= 0 && rampStep <= 3) {
+                if (rampStep >= 0 && rampStep <= 3) {
                     setRPM = ramp[rampStep];
                     setTime = ramp[++rampStep];
                 } else {
@@ -250,28 +275,28 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
                     paused = true;
                     stopMotor();
                 }
-                
+
                 minText = "MIN";
                 maxText = "MAX";
             } else {
                 stepTime = setTime - time;
-                
-                if(rampStep == 1) {
-                    if(stepTime%2 == 0) {
+
+                if (rampStep == 1) {
+                    if (stepTime % 2 == 0) {
                         minText = "MIN";
                     } else {
-                        minText =  getPaddedNumber(stepTime, 3);
+                        minText = getPaddedNumber(stepTime, 3);
                     }
                 } else {
-                    if(time%2 == 0) {
+                    if (time % 2 == 0) {
                         maxText = "MAX";
                     } else {
                         maxText = getPaddedNumber(stepTime, 3);
                     }
                 }
-                
+
                 // reach end time of this step so move to next step or stop motor if at end
-                if(stepTime == 0) {
+                if (stepTime == 0) {
                     runTime = 0;
                     rampStep++;
                 }
@@ -293,11 +318,11 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
     private void displayDipCoaterMenu(int change) {
         StringBuilder sb = new StringBuilder();
         sb.append("DIP COATER CONTROL\n\n");
-        sb.append("SPEED  ").append(getPaddedNumber(dipSpeed,3)).append(" mm/min\n");
+        sb.append("SPEED  ").append(getPaddedNumber(dipSpeed, 3)).append(" mm/min\n");
         sb.append("TRAVEL ").append(dipDirection).append(getPaddedNumber(dipTravel, 2)).append(" mm\n");
         sb.append("TIME   ").append(getPaddedNumber(dipTime, 4)).append(" s\n");
         sb.append("MODE   ").append(dipMode[dipModeIdx]);
-        
+
         screenTextArea.setText(sb.toString());
     }
 
@@ -314,7 +339,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("SETUP\n");
+        sb.append("SETUP:\n");
         sb.append(((srow1 == 1) ? "  *" : "   ")).append("START ").append(start[startIdx]).append("\n");
         sb.append(((srow1 == 2) ? "  *" : "   ")).append("BL ").append(bl[blIdx]).append("\n");
         sb.append(((srow1 == 3) ? "  *" : "   ")).append("RAMP\n");
@@ -323,14 +348,14 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
 
         screenTextArea.setText(sb.toString());
     }
-    
+
     /**
      * Menu to setup ramp setup
-     * @param change 
+     *
+     * @param change
      */
     private void displayRampSetupMenu(int change) {
-        
-        
+
         // display menu now
         StringBuilder sb = new StringBuilder();
 
@@ -342,7 +367,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         screenTextArea.setText(sb.toString());
         highlightText(" " + rampIdx + " ", 0);
     }
-    
+
     /**
      * Menu for configuring the BLDC motor
      *
@@ -361,7 +386,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
             if (srow3 == 1) {
                 if (change == 1) {
                     modelIdx = 1;
-                } else if(change == -1) {
+                } else if (change == -1) {
                     modelIdx = 0;
                 }
             }
@@ -382,7 +407,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
                 highlightText(model[modelIdx], 0);
             } else if (srow3 == 2) {
                 highlightText("CALIBRATE", 0);
-                if(calibrate) {
+                if (calibrate) {
                     // ***CODE***
                 }
             }
@@ -399,7 +424,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
                 srow4 = 1;
             }
         }
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("STEPPER:\n");
         sb.append(((srow4 == 1) ? "*" : " ")).append("ACTIVE ").append(stepActive).append("\n");
@@ -407,7 +432,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         sb.append(((srow4 == 3) ? "*" : " ")).append("SPEED  ").append(stepMaxSpeed).append("\n");
         sb.append(((srow4 == 4) ? "*" : " ")).append("EXC    ").append(stepEXC[stepEXCIdx]).append("\n");
         sb.append(((srow4 == 5) ? "*" : " ")).append("DIR    ").append(stepDirection);
-        
+
         screenTextArea.setText(sb.toString());
     }
 
@@ -596,12 +621,34 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
             if (response.contains("MIM")) {
                 connected = true;
                 consoleTextArea.setText("Connected to " + response);
-                miMTalk.sendCommand("BLDCon");
+                
+                print("Setting Up MiM");
+                
+                if(currentMode == Mode.BLDC) { 
+                    miMTalk.sendCommand("SetPWMStart," + bldcStartPWM[modelIdx]);
+                    miMTalk.sendCommand("SetSlope," + bldcSlope[modelIdx]);
+                    miMTalk.sendCommand("SetIntercept," + bldcIntercept[modelIdx]);
+                    miMTalk.sendCommand("BLDCon");
+                    print("BLDC Ready ...");
+                } else {
+                    miMTalk.sendCommand("STEPon");
+                    miMTalk.sendCommand("SleepOn");
+                    print("STEPPER Ready ...");
+                }
+                
+                if(currentMenu == Menu.MAIN) {
+                    displayMainMenu(0);
+                }
+            } else {
+                connectToggleButton.setSelected(false);
+                consoleTextArea.setText("Error Connecting to MiM");
             }
         } else {
-            connected = false;
-            miMTalk.sendCommand("BLDCoff");
-            miMTalk.close();
+            if(connected) {
+                connected = false;
+                miMTalk.sendCommand("BLDCoff");
+                miMTalk.close();
+            }
         }
     }//GEN-LAST:event_connectToggleButtonActionPerformed
 
@@ -635,13 +682,13 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
                     currentMenu = Menu.MAIN;
                     break;
             }
-            
-            if(currentMenu == Menu.ANALOG) {
+
+            if (currentMenu == Menu.ANALOG) {
                 jSlider1StateChanged(null);
             } else {
                 setRPM = 0;
             }
-            
+
             displayMenu(0);
             startMenuUpdate();
         } else if (currentMenu == Menu.ANALOG) {
@@ -678,6 +725,14 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         } else if (currentMenu == Menu.SETUP_BLDC) {
             paused = false;
             displayBLDCMenu(0);
+
+            if (srow3 == 2) {
+                lms = new ArrayList<LinearRegression>();
+                calibrate = true;
+                calibrateCycle = 1;
+                consoleTextArea.setText("");
+                calibrateMotor();
+            }
         }
     }//GEN-LAST:event_entButtonActionPerformed
 
@@ -709,8 +764,8 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         if (!jSlider1.getValueIsAdjusting()) {
             double value = (float) jSlider1.getValue();
-            int rpm = (int) ((value / 1000.0) * speed[speedIdx]);
-            setRPM = ((rpm+5)/10)*10;
+            int rpm = (int) ((value / 1000.0) * speed[modelIdx]);
+            setRPM = ((rpm + 5) / 10) * 10;
         }
     }//GEN-LAST:event_jSlider1StateChanged
 
@@ -730,7 +785,12 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
 
                     if (!paused) {
                         runTime++;
-                        moveMotor();
+
+                        if (calibrate) {
+                            calibrateMotor();
+                        } else {
+                            moveMotor();
+                        }
                     }
 
                     // flip this to cycle between pause and not paused
@@ -747,9 +807,11 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
             psetRPM = setRPM;
             loopCount = 1;
             totalRPM = 0;
+
+            System.out.println("Running motor @ " + setRPM);
+
             if (connected) {
                 miMTalk.sendCommand("SetRPM," + setRPM);
-                System.out.println("Running motor @ " + setRPM);
             }
         } else {
             loopCount++;
@@ -763,6 +825,63 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
             miMTalk.sendCommand("SetRPM," + 0);
         }
         System.out.println("Stoping motor");
+    }
+
+    private void calibrateMotor() {
+        int time = runTime;
+
+        if (time == 0) {
+            calibrateStep = 0;
+            calibratePWM = 0;
+            xlist = new ArrayList<>();
+            ylist = new ArrayList<>();
+            print("Running calibration cycle: " + calibrateCycle);
+            System.out.println("PWM\tRPM");
+        }
+
+        if (time % 10 == 0) { // move to new speed every 10 seconds
+            calibratePWM = 100 + (50 * calibrateStep);
+            calibrateRPM = -1;
+            if (connected && calibratePWM <= 1000) {
+                miMTalk.sendCommand("SetPWM," + calibratePWM);
+            }
+        }
+
+        if (time > 0 && time % 15 == 0) { // read and store data every 15 seconds
+            if (connected) {
+                String rpm = miMTalk.sendCommand("GetRPM");
+                calibrateRPM = Integer.parseInt(miMTalk.getResponseValue(rpm));
+            } else {
+                calibrateRPM = calibratePWM - 100;
+            }
+
+            xlist.add(new Double(calibratePWM));
+            ylist.add(new Double(calibrateRPM));
+
+            System.out.println(calibratePWM + "\t" + calibrateRPM);
+
+            calibrateStep++;
+        }
+
+        if (calibratePWM > 1000) {
+            stopMotor();
+            calibratePWM = 0;
+            calibrateCycle++;
+
+            fitProfileData();
+
+            if (calibrateCycle > calibrateCycleCount) {
+                paused = true;
+                calibratePWM = 0;
+                calibrateRPM = 0;
+
+                // calculate the average values for the fit
+                averageFitData();
+                print("\nMotor Profile Completed ...");
+            } else {
+                runTime = -5; // other wise create a 5 second delay
+            }
+        }
     }
 
     private String getMeasuredRPM() {
@@ -783,7 +902,7 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
                         totalRPM += measuredRPM;
                         int count = loopCount - 4;
                         int averageRPM = (int) (totalRPM / count);
-                        consoleTextArea.setText("Average RPM: " + averageRPM + " [" + count+ "]");
+                        consoleTextArea.setText("Average RPM: " + averageRPM + " [" + count + "]");
                     }
                 } catch (StringIndexOutOfBoundsException e) {
                     System.out.println("Error reading rpm ...");
@@ -795,8 +914,48 @@ public class PDCSTV3Frame extends javax.swing.JFrame {
         }
     }
 
+    private void fitProfileData() {
+        HashMap<String, Double[]> motorProfileMap = new HashMap<>();
+        Double[] x = new Double[xlist.size()];
+        Double[] y = new Double[ylist.size()];
+
+        motorProfileMap.put("x", xlist.toArray(x));
+        motorProfileMap.put("y", ylist.toArray(y));
+
+        LinearRegression lm = new LinearRegression(motorProfileMap);
+        print(lm.toString());
+        lms.add(lm);
+    }
+
+    private void averageFitData() {
+        int size = lms.size();
+        double slope = 0;
+        double intercept = 0;
+
+        for (LinearRegression lm : lms) {
+            if (!Double.isNaN(lm.slope())) {
+                slope += lm.slope();
+                intercept += lm.intercept();
+            } else {
+                size--;
+            }
+        }
+        
+        // round the slope and intercept
+        DecimalFormat df = new DecimalFormat("#.#");      
+        double rslope = Double.valueOf(df.format(slope/size));
+        int rintercept = (int)(intercept/size);
+        
+        print("Avg slope: " + rslope);
+        print("Avg intercept: " + rintercept);
+    }
+
     private String getPaddedNumber(int number, int pad) {
         return String.format("%0" + pad + "d", number);
+    }
+
+    private void print(String text) {
+        consoleTextArea.append(text + "\n");
     }
 
     /**
